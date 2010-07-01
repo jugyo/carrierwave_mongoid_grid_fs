@@ -27,7 +27,7 @@ module CarrierWave
 
         def grid
           @grid ||= Mongo::GridFileSystem.new(
-                        ::Mongoid.slaves.empty? ? ::Mongoid.master : ::Mongoid.slaves)
+                        (::Mongoid.slaves.nil? || ::Mongoid.slaves.empty?) ? ::Mongoid.master : ::Mongoid.slaves)
         end
 
         def grid_to_write
